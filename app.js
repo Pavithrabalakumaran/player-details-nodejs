@@ -101,7 +101,7 @@ app.get("/matches/:matchId/", async (request, response) => {
         match_id = ${matchId};
     `;
 
-  const matchDetails = await database.get(matchPlayerQuery);
+  const matchDetails = await database.get(matchDetailsQuery);
   response.send(convertPlayerDbObjectToResponseObject(matchDetails));
 });
 
@@ -110,7 +110,8 @@ app.get("/players/:playerId/matches/", async (request, response) => {
   const getPlayerMatchesQuery = `
     SELECT
       *
-    FROM player_match_score 
+    FROM 
+    player_match_score 
       NATURAL JOIN match_details
     WHERE
       player_id = ${playerId};`;
